@@ -3,9 +3,11 @@ var isFlipped = false;
 var firstCard, secondCard;
 var lock = false;
 
+cards.forEach(card => card.addEventListener("click", flip));
+
 function flip(){
-	if(lock) return;
-	if(this === firstCard) return;
+	if (lock) return;
+	if (this === firstCard) return;
 	this.classList.add("flip");
 	if(!isFlipped){
 		isFlipped = true;
@@ -17,8 +19,8 @@ function flip(){
 }
 
 function reset(){
-	isFlipped, lock = false;
-	firstCard, secondCard = null;
+	[isFlipped, lock] = [false, false];
+	[firstCard, secondCard] = [null, null];
 }
 
 function success(){
@@ -33,19 +35,17 @@ function fail(){
 		firstCard.classList.remove("flip");
 		secondCard.classList.remove("flip");
 		reset();
-	}, 2000);
+	}, 1500);
 }
 
 function check(){
-	var isMatch = firstCard.image === secondCard.image;
+	var isMatch = firstCard.dataset.image === secondCard.dataset.image;
 	isMatch ? success() : fail();
 }
 
-function shuffle(){
+(function shuffle(){
 	cards.forEach(card => {
 		var position = Math.floor(Math.random() * 12);
 		card.style.order = position;
-	})
-}
-
-cards.forEach(card => card.addEventListener("click", flip));
+	});
+})();
