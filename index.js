@@ -45,7 +45,7 @@ function check(){
 
 (function shuffle(){
 	cards.forEach(card => {
-		var position = Math.floor(Math.random() * 12);
+		var position = Math.floor(Math.random() * 16);
 		card.style.order = position;
 	});
 })();
